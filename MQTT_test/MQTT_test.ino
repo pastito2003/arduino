@@ -11,7 +11,7 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 const char* ssid = "COVACHA";
-const char* password = "theraininspa1n";
+const char* password = "";
 
 const char* mqttServer = "192.168.0.159";
 const int mqttPort = 1883;

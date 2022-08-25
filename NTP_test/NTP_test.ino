@@ -4,9 +4,9 @@
 
 // Replace with your network credentials
 const char* ssid = "COVACHA";
-const char* password = "theraininspa1n";
+const char* password = "";
 //const char* ssid     = "Tele-7614";
-//const char* password = "tele-8443";
+//const char* password = "";
 
 
 // Define NTP Client to get time

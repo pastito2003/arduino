@@ -30,9 +30,9 @@ AsyncWebServer server(80);
 AsyncWebSocket ws("/ws"); // access at ws://[esp ip]/ws
 
 const char* ssid = "COVACHA";
-const char* password = "theraininspa1n";
+const char* password = "";
 //const char* ssid     = "Tele-7614";
-//const char* password = "tele-8443";
+//const char* password = "";
 
 const char* PARAM_INPUT_1 = "input1";
 const char* PARAM_INPUT_2 = "input2";
