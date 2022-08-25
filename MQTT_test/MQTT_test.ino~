@@ -1,0 +1,49 @@
+#include <WiFi.h>
+#include <PubSubClient.h>
+
+const char* ssid = "COVACHA";
+const char* password = "theraininspa1n";
+const char* mqttServer = "192.168.1.36";
+const int mqttPort = 1883;
+const char* mqttUser = "charly";
+const char* mqttPassword = "contrase";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void setup()
+{ 
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  Serial.println("...................................");
+
+  Serial.print("Connecting to WiFi.");
+  while (WiFi.status() != WL_CONNECTED)
+       {  delay(500);
+          Serial.print(".") ;
+       }
+  Serial.println("Connected to the WiFi network");
+  client.setServer(mqttServer, mqttPort);
+  while (!client.connected()) {
+    Serial.println("Connecting to MQTT...");
+  
+       if (client.connect("ESP32Client", mqttUser, mqttPassword ))
+           Serial.println("connected");
+       else
+       {   Serial.print("failed with state ");
+           Serial.print(client.state());
+           delay(2000);
+       }
+}
+
+void loop()
+  {  
+    client.loop();
+    char str[16];
+    sprintf(str, "%u", random(100));
+
+    client.publish("Prosensor/CO2", str);
+    Serial.println(str);
+    delay(500);
+ }
+ 
