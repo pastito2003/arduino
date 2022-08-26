@@ -42,7 +42,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 const char* ssid     = "Tele-7614";
-const char* password = "tele-8443";
+const char* password = "";
 
 WiFiServer server(80);
 
