@@ -36,7 +36,7 @@ AsyncWebServer server(80);
 AsyncWebSocket ws("/ws"); // access at ws://[esp ip]/ws
 
 const char* ssid = "COVACHA";
-const char* password = "";
+const char* password = "theraininspa1n";
 //const char* ssid     = "Tele-7614";
 //const char* password = "";
 
@@ -122,11 +122,12 @@ void eeprom_write() {
   EEPROM.end();
 }
 
-void parse_millis (unsigned long milisegundos) {   //Funcion para parsear los milisegundos e imprimirlos legibles en dias:horas:minutos:segundos
-  unsigned long segundos;
+void parse_millis () {   //Funcion para parsear los milisegundos e imprimirlos legibles en dias:horas:minutos:segundos
+  unsigned long segundos, milisegundos;
   long minutos;
   int horas, dias;
-  
+
+  milisegundos = millis();
   segundos = milisegundos / 1000;
   minutos = segundos / 60;
   horas = minutos / 60;
@@ -135,7 +136,7 @@ void parse_millis (unsigned long milisegundos) {   //Funcion para parsear los mi
   minutos %= 60;
   horas %= 24;
   
-  sprintf (hora, "%02d:%02d:%02ld:%02ld", dias, horas, minutos, segundos);
+  sprintf (hora, "%04d:%02d:%02ld:%02ld", dias, horas, minutos, segundos);
 }
 
 void notFound(AsyncWebServerRequest *request) {
@@ -193,7 +194,7 @@ void setup() {
       response->print(tempAd);
       response->println(" grados</h3>");
       
-      parse_millis (millis());
+      parse_millis ();
       
       response->print ("<h4>Tiempo de encendido: ");
       response->println(hora);
@@ -333,7 +334,7 @@ void loop() {
     Serial.println(WiFi.localIP());
   #endif
   
-  parse_millis(millis());
+  parse_millis();
   
   #ifdef DEBUG
     sprintf (mybuffer, "Uptime %s", hora);
